@@ -1,33 +1,34 @@
-const myTitle = 'A Beautiful Poem'
-let myObject = {'adjectives': ['verdant', 'powerful', 'afraid'], 'nouns': ['rock', 'mountain', 'tree', 'blade of grass']}
-let myArticleArray = ['The', 'an', 'a']
+var t = 0,
+people = ['ENCHANTMENT', 'THE NAVAJO', 'THE APACHE', 'THE COMANCHE', 'THE UTES', 'THE MOGOLLON', 'THE PUEBLO', 'EL NORTE'],
+elements = ['OIL DRILLING', 'GREEN CHILI', 'TAX HAVENS', 'ACTOMIC BOMBS', 'ADOBE HOMES', 'THE BALLOON FESTIVAL', 'THE MANHATTAN PROJECT', 'MINERAL EXTRACTION', 'LUMBER MILLING', 'THE HIGH DESERT', 'BIG SKIES', 'THE WHITE SANDS MISSILE RANGE', 'URANIUM'],
+settlers = ['THE SPANISH', 'PROTESTANTS', 'GOLD MINERS', 'SCIENTISTS', 'THE UNITED STATES AIR FORCE', 'RETIREES', 'CONORADO', 'MEXICAN IMMIGRANTS', 'ARTISTS', 'LATTER-DAY SAINTS'];
 
-function returnPoem(title, article, noun, adjective) {
-  return title + ': ' + article + ' ' + adjective + ' ' + noun
+function rand_range(maximum) {
+    "use strict";
+    return Math.floor(Math.random() * (maximum + 1));
 }
-
-W(returnPoem(myTitle, myArticleArray[0], myObject.adjectives[0],myObject.nouns[0]))
-
-function forLoopPoem(title, articles, nouns, adjectives) {
-  W(title)
-  for (i = 0; i < 3; i++) {
-    W(articles[i] + ' ' + nouns[i] + ' ' + adjectives[i])
-  }
+function choose(array) {
+    "use strict";
+    return array[rand_range(array.length - 1)];
 }
-
-forLoopPoem(myTitle, myArticleArray, myObject.nouns, myObject.adjectives)
-
-
-// while loop poem:
-let counter = 0
-while(counter < 5) {
-  W(getRandomItem(myArticleArray) + ' ' + getRandomItem(myObject.adjectives) + ' ' + getRandomItem(myObject.nouns))
-  counter++
+function stanza() {
+    "use strict";
+    return 'THE LAND OF ' + choose(people) + '<br \>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WITH ' + choose(elements) + '<br \>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SETTLED BY ' + choose(settlers);
 }
-
-function getRandomItem(array) {
-  //don't worry about the math here, this just selects a random item from the array
-  //but it could be useful if you want to do something similar!
-
-return array[Math.floor(Math.random()*array.length)]
+function litany() {
+    "use strict";
+    var last, text, main = document.getElementById('main');
+    if (8 > t) {
+        t += 1;
+    } else {
+        main.removeChild(document.getElementById('main').firstChild);
+    }
+    last = document.createElement('div');
+    last.innerHTML = stanza();
+    main.appendChild(last);
+}
+function produce_litany() {
+    "use strict";
+    litany();
+    setInterval(litany, 5000);
 }
